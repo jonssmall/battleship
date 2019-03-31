@@ -40,8 +40,14 @@ describe("Ship Placer", () => {
         expect(grid.rows[3].cells[3].occupiedBy).to.not.equal(shipB);
     });
 
-    // todo
     it ("Does not put a ship over the edge", () => {
         const grid = newSquareGrid(10);
+        const ship = newHugeShip(axis.Y, {x: 7, y: 0});
+        addShip(grid, ship);
+
+        expect(grid.rows[6].cells[0].occupiedBy).to.equal(null);
+        expect(grid.rows[7].cells[0].occupiedBy).to.equal(null);
+        expect(grid.rows[8].cells[0].occupiedBy).to.equal(null);
+        expect(grid.rows[9].cells[0].occupiedBy).to.equal(null);
     });
 });
