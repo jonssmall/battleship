@@ -16,8 +16,8 @@ describe("Ship Placer", () => {
         const shipA = newSmallShip(axis.X, {x: 0, y: 0});
         const shipB = newSmallShip(axis.X, {x: 0, y: 0});
         addShip(grid, shipA);
-        addShip(grid, shipB);
 
+        expect(() => addShip(grid, shipB)).to.throw("detected");
         expect(grid.rows[0].cells[0].occupiedBy).to.equal(shipA);
         expect(grid.rows[0].cells[0].occupiedBy).to.not.equal(shipB);
     });
@@ -27,7 +27,7 @@ describe("Ship Placer", () => {
         const shipA = newHugeShip(axis.X, {x: 0, y: 3});
         const shipB = newHugeShip(axis.Y, {x: 3, y: 0});
         addShip(grid, shipA);
-        addShip(grid, shipB);
+        expect(() => addShip(grid, shipB)).to.throw("detected");
 
         expect(grid.rows[3].cells[0].occupiedBy).to.equal(shipA);
         expect(grid.rows[3].cells[1].occupiedBy).to.equal(shipA);
@@ -40,11 +40,22 @@ describe("Ship Placer", () => {
         expect(grid.rows[3].cells[3].occupiedBy).to.not.equal(shipB);
     });
 
-    it ("Does not put a ship over the edge", () => {
+    it ("Does not put a ship over the right edge", () => {
         const grid = newSquareGrid(10);
-        const ship = newHugeShip(axis.Y, {x: 7, y: 0});
-        addShip(grid, ship);
+        const ship = newHugeShip(axis.X, {x: 7, y: 0});
 
+        expect(() => addShip(grid, ship)).to.throw("detected");
+        expect(grid.rows[0].cells[6].occupiedBy).to.equal(null);
+        expect(grid.rows[0].cells[7].occupiedBy).to.equal(null);
+        expect(grid.rows[0].cells[8].occupiedBy).to.equal(null);
+        expect(grid.rows[9].cells[9].occupiedBy).to.equal(null);
+    });
+
+    it ("Does not put a ship over the bottom edge", () => {
+        const grid = newSquareGrid(10);
+        const ship = newHugeShip(axis.Y, {x: 0, y: 7});
+
+        expect(() => addShip(grid, ship)).to.throw("detected");
         expect(grid.rows[6].cells[0].occupiedBy).to.equal(null);
         expect(grid.rows[7].cells[0].occupiedBy).to.equal(null);
         expect(grid.rows[8].cells[0].occupiedBy).to.equal(null);
