@@ -6,7 +6,7 @@ import { Ship } from "../models/ship";
 // between grid and player entities. May revisit later.
 export function addShip(grid: Grid, newShip: Ship): Grid {
 
-    if (!isOverEdge(grid, newShip) && !newShip.positions.some((p) => isOccupied(grid, p))) {
+    if (legalPlacement(grid, newShip)) {
         newShip.positions.forEach((p) => {
             const [x, y] = [p.x, p.y];
             grid.rows[y].cells[x].occupiedBy = newShip;
@@ -27,4 +27,8 @@ function isOverEdge(grid: Grid, ship: Ship): boolean {
     // last element in positions array is furthest coordinate of ship
     const coordinate = ship.positions[ship.positions.length - 1];
     return coordinate.x > grid.rows.length - 1 || coordinate.y > grid.rows[0].cells.length - 1;
+}
+
+function legalPlacement(grid: Grid, ship: Ship): boolean {
+    return !isOverEdge(grid, ship) && ship.positions.every((p) => !isOccupied(grid, p));
 }
