@@ -46,7 +46,8 @@ function randomPlacement(grid: Grid, shipBuilder: (axis: axis, coord: Coordinate
             addShip(grid, ship);
             break;
         } catch (e) {
-            console.log((e as Error).message);
+            // do nothing for now.
+            // console.log((e as Error).message);
         }
     }
     return ship;
