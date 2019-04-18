@@ -1,8 +1,8 @@
 import { addShip } from "../maker/shipPlacer";
+import { random } from "../utilities/random";
 import { Coordinate } from "./coordinate";
 import { Cell, Grid } from "./grid";
 import { axis, newHugeShip, newLargeShip, newMedShip, newSmallShip, Ship } from "./ship";
-import { random } from "../utilities/random";
 
 export interface Player {
     fleet: Ship[];
