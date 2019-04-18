@@ -9,7 +9,7 @@ export function getCell(grid: Grid, coordinate: Coordinate): Cell {
     }
 }
 
-function outOfRange(grid: Grid, coordinate: Coordinate): boolean {
+export function outOfRange(grid: Grid, coordinate: Coordinate): boolean {
     return (
         coordinate.y < 0 ||
         coordinate.x < 0 ||

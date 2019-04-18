@@ -1,6 +1,7 @@
 import { Coordinate } from "../models/coordinate";
 import { Grid } from "../models/grid";
 import { Ship } from "../models/ship";
+import { getCell, outOfRange } from "../utilities/getCell";
 
 // todo: Unable to deep copy because we need to preserve references to Ship objects shared
 // between grid and player entities. May revisit later.
@@ -8,8 +9,7 @@ export function addShip(grid: Grid, newShip: Ship): Grid {
 
     if (legalPlacement(grid, newShip)) {
         newShip.positions.forEach((p) => {
-            const [x, y] = [p.x, p.y];
-            grid.rows[y].cells[x].occupiedBy = newShip;
+            getCell(grid, p).occupiedBy = newShip;
         });
     } else {
         // todo: is throw the right approach here?
@@ -20,13 +20,13 @@ export function addShip(grid: Grid, newShip: Ship): Grid {
 }
 
 function isOccupied(grid: Grid, coordinate: Coordinate): boolean {
-    return !!grid.rows[coordinate.y].cells[coordinate.x].occupiedBy;
+    return !!getCell(grid, coordinate).occupiedBy;
 }
 
 function isOverEdge(grid: Grid, ship: Ship): boolean {
     // last element in positions array is furthest coordinate of ship
     const coordinate = ship.positions[ship.positions.length - 1];
-    return coordinate.x > grid.rows.length - 1 || coordinate.y > grid.rows[0].cells.length - 1;
+    return outOfRange(grid, coordinate);
 }
 
 function legalPlacement(grid: Grid, ship: Ship): boolean {
