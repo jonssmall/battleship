@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --require ts-node/register **/**/*.spec.ts",
-    "print": "ts-node console/print.e2e.ts"
+    "print": "ts-node cli/print.e2e.ts"
   },
   "author": "",
   "license": "ISC",

@@ -1,6 +1,6 @@
-import { newSquareGrid } from "../maker/gridMaker";
-import { Grid } from "../models/grid";
-import { playerFactory } from "../models/player";
+import { newSquareGrid } from "../game/maker/gridMaker";
+import { Grid } from "../game/models/grid";
+import { playerFactory } from "../game/models/player";
 import { printGrid } from "./print";
 
 const grid = newSquareGrid(10);
