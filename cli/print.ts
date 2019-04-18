@@ -1,4 +1,4 @@
-import { Grid, Cell } from "../models/grid";
+import { Cell, Grid } from "../game/models/grid";
 
 // Print each grid.row on its own row separated by a newline
 // print each row.cell as an array shape "[ ]"

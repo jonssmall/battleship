@@ -2,6 +2,7 @@ import { addShip } from "../maker/shipPlacer";
 import { Coordinate } from "./coordinate";
 import { Cell, Grid } from "./grid";
 import { axis, newHugeShip, newLargeShip, newMedShip, newSmallShip, Ship } from "./ship";
+import { random } from "../utilities/random";
 
 export interface Player {
     fleet: Ship[];
@@ -53,22 +54,14 @@ function randomPlacement(grid: Grid, shipBuilder: (axis: axis, coord: Coordinate
     return ship;
 }
 
-//  Returns a random integer between min (include) and max (include)
-//  Math.floor(Math.random() * (max - min + 1)) + min;
 function randomAxis(): axis {
-    const zeroToOne = Math.floor(Math.random() * 2);
-    return zeroToOne ? axis.X : axis.Y;
+    return random(0, 1) ? axis.X : axis.Y;
 }
 
-// 0 to 9
 function randomCoordinate(grid: Grid): Coordinate {
-    const gridHeight = grid.rows.length;
-    const x = Math.floor(Math.random() * gridHeight);
-    const y = Math.floor(Math.random() * gridHeight);
-
     return {
-        x,
-        y,
+        x: random(0, grid.rows.length - 1),
+        y: random(0, grid.rows.length - 1),
     };
 }
 
