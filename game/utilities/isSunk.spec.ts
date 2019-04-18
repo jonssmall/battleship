@@ -1,8 +1,8 @@
 import { expect } from "chai";
 import { newSquareGrid } from "../maker/gridMaker";
+import { addShip } from "../maker/shipPlacer";
 import { axis, newHugeShip } from "../models/ship";
 import { isSunk } from "./isSunk";
-import { addShip } from "../maker/shipPlacer";
 
 describe("Ship sunk checker", () => {
 
