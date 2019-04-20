@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha --require ts-node/register **/**/*.spec.ts",
     "print": "ts-node cli/print.e2e.ts",
-    "read": "ts-node cli/read.e2e.ts"
+    "read": "ts-node cli/read.e2e.ts",
+    "zero": "ts-node cli/aiGame.ts"
   },
   "author": "",
   "license": "ISC",

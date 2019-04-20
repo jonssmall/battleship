@@ -1,20 +1,23 @@
 import { addShip } from "../maker/shipPlacer";
-import { getCell } from "../utilities/getCell";
 import { random } from "../utilities/random";
 import { Coordinate } from "./coordinate";
-import { Grid } from "./grid";
+import { Cell, Grid } from "./grid";
 import { axis, newHugeShip, newLargeShip, newMedShip, newSmallShip, Ship } from "./ship";
+import { isSunk } from "../utilities/isSunk";
 
 export interface Player {
     fleet: Ship[];
     // does this need to return anything special to the user?
-    checkSquare: (coordinate: Coordinate) => Grid;
+    checkSquare: (cell: Cell) => Grid;
+    isFleetDestroyed: () => boolean;
 }
 
 export function playerFactory(selfGrid: Grid, enemyGrid: Grid): Player {
+    const fleet = generateFleet(selfGrid);
     return {
         checkSquare: checkSquare.bind(null, enemyGrid),
-        fleet: generateFleet(selfGrid),
+        fleet,
+        isFleetDestroyed: isFleetDestroyed.bind(null, fleet),
     };
 }
 
@@ -66,13 +69,17 @@ function randomCoordinate(grid: Grid): Coordinate {
     };
 }
 
-function checkSquare(enemyGrid: Grid, coordinate: Coordinate): Grid {
-    const cell = getCell(enemyGrid, coordinate);
-
+function checkSquare(enemyGrid: Grid, cell: Cell): Grid {
     // todo: private fields w/ external accessors ??
     cell.discovered = true;
 
-    // todo: ship.sunk property?
+    if (cell.occupiedBy && isSunk(enemyGrid, cell.occupiedBy)) {
+        cell.occupiedBy.sunk = true;
+    }
 
     return enemyGrid;
+}
+
+function isFleetDestroyed(fleet: Ship[]): boolean {
+    return fleet.every((s) => s.sunk);
 }
