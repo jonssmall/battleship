@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --require ts-node/register **/**/*.spec.ts",
-    "print": "ts-node cli/print.e2e.ts"
+    "print": "ts-node cli/print.e2e.ts",
+    "read": "ts-node cli/read.e2e.ts"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.6",
+    "@types/node": "^11.13.6",
     "chai": "^4.2.0",
     "mocha": "^6.0.2",
     "ts-node": "^8.0.3",

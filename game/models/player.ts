@@ -1,7 +1,8 @@
 import { addShip } from "../maker/shipPlacer";
+import { getCell } from "../utilities/getCell";
 import { random } from "../utilities/random";
 import { Coordinate } from "./coordinate";
-import { Cell, Grid } from "./grid";
+import { Grid } from "./grid";
 import { axis, newHugeShip, newLargeShip, newMedShip, newSmallShip, Ship } from "./ship";
 
 export interface Player {
@@ -66,7 +67,7 @@ function randomCoordinate(grid: Grid): Coordinate {
 }
 
 function checkSquare(enemyGrid: Grid, coordinate: Coordinate): Grid {
-    const cell: Cell = enemyGrid.rows[coordinate.y].cells[coordinate.x];
+    const cell = getCell(enemyGrid, coordinate);
 
     // todo: private fields w/ external accessors ??
     cell.discovered = true;
