@@ -1,9 +1,9 @@
 import { addShip } from "../maker/shipPlacer";
+import { isSunk } from "../utilities/isSunk";
 import { random } from "../utilities/random";
 import { Coordinate } from "./coordinate";
 import { Cell, Grid } from "./grid";
 import { axis, newHugeShip, newLargeShip, newMedShip, newSmallShip, Ship } from "./ship";
-import { isSunk } from "../utilities/isSunk";
 
 export interface Player {
     fleet: Ship[];
