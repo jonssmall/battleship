@@ -20,7 +20,10 @@ function rowToDiv(row: Row, index: number): HTMLElement {
 }
 
 function cellToDiv(cell: Cell, index: number): HTMLElement {
-    const uiCell = document.createElement("div");
+    const uiCell = document.createElement("span");
+
     uiCell.setAttribute("data-cell", index.toString());
+    uiCell.classList.add("cell");
+
     return uiCell;
 }
