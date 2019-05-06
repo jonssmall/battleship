@@ -2,4 +2,14 @@
     height: 50px;
     width: 50px;
     border: solid 1px black;
+    display: inline-block;
+    background-color: grey
+}
+
+.discovered {
+    background-color: cornflowerblue;
+}
+
+.occupied {
+    background-color: palevioletred;
 }

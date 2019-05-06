@@ -1,0 +1,7 @@
+1. display random AI board to user
+2. convert click events to discovery/occupied cells
+3. have AI act against player's board in alternating turns
+4. victory conditions
+
+
+4/21 sandbox goals are 1 and 2
